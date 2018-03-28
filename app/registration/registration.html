@@ -1,0 +1,37 @@
+<section ng-if="$ctrl.isTermsAndConditions" class="pt-5 pb-5">
+    <div class="container">
+        <h1 class="display-4 text-center pb-5">Participate</h1>
+        <p class="lead">
+                I hereby acknowledge that I have read and understood the terms and conditions as provided in the "Token Sale Terms and Conditions"
+                and I agree to all of the terms and conditions, and, in particular:
+        </p>
+        <div class="row pt-5 pb-5">
+            <p class="lead col-md-4 text-center">
+                You are not a US citizen or residing in the US.
+            </p>
+            <p class="lead col-md-4 text-center">
+                    You will have to undergo a video identiﬁcation process to comply with anti money laundering (AML) and know your customer (KYC) regulations.
+            </p>
+            <p class="lead col-md-4 text-center">
+                The minimum contribution is USD 500.
+            </p>
+        </div>
+        <p class="lead">
+            If you do not agree or understand the Token Sale Terms and Conditions, do not purchase Tokens.
+        </p>
+        <p class="lead">
+            Click Accept to indicate that you have read and agree to the terms and conditions,
+            including Section 8 governing use of the Personal Information, presented in the Terms and Conditions.
+        </p>
+        <a class="btn btn-primary btn-lg" href="" ng-click="$ctrl.acceptTermsAndConditions()">Accept</a>
+    </div>
+    
+</section>
+
+<div ng-if="$ctrl.isAccepted">
+
+</div>
+
+<div ng-if="$ctrl.isSignedUp">
+    
+</div>
