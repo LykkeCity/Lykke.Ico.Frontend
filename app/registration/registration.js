@@ -1,27 +1,38 @@
-class DashboardController {
-    constructor($http) {
+class RegistrationController {
+    constructor($http, urls) {
         this.$http = $http;
-        this.isTermsAndConditions = true;
+        this.urls = urls;
         this.isAccepted = false;
         this.isSignedUp = false;
+        this.data = { };
     }
 
-    $onInit() {
-    }
-
-    acceptTermsAndConditions() {
-        this.isTermsAndConditions = false;
+    accept() {
         this.isAccepted = true;
     }
 
     signUp() {
-        this.isAccepted = false;
-        this.isSignedUp = true;
+        this.$http.post(this.urls.getInvestorRegistrationUrl(), this.data)
+            .then(resp => {
+                this.isSignedUp = true;
+            });   
+    }
+
+    showTermsAndConditions() {
+        return !this.isAccepted && !this.isSignedUp;
+    }
+
+    showForm() {
+        return this.isAccepted && !this.isSignedUp;
+    }
+
+    showConfirmation() {
+        return this.isSignedUp;
     }
 }
 
 angular.module("app")
     .component("registration", {
         templateUrl: "app/registration/registration.html",
-        controller: DashboardController
+        controller: RegistrationController
     });

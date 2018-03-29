@@ -6,7 +6,13 @@ angular
         $routeProvider
             .when("/", { template: "<landing></landing>" })
             .when("/registration", { template: "<registration></registration>" })
-            .when("/summary", { template: "<summary></summary>" })        
+            .when("/registration/verify/:confirmationToken", { 
+                resolveRedirectTo: function($http, $route, urls) {
+                    return $http.get(urls.getInvestorConfirmationUrl($route.current.params.confirmationToken))
+                        .then(resp => `/summary/${resp.data.authToken}`);
+                }
+            })
+            .when("/summary/:authToken", { template: "<summary></summary>"})
             .otherwise({
                 redirectTo: "/"
             });
