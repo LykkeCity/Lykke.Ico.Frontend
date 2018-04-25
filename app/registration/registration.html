@@ -4,8 +4,7 @@
         <div ng-show="$ctrl.showTermsAndConditions()">
             <p class="lead">
                 I hereby acknowledge that I have read and understood the terms and conditions as provided on the
-                <a href="https://www.lykke.com/cp/terms-and-regulation">Terms and Regulation</a> page
-                and I agree to all of the terms and conditions, and, in particular:
+                <a href="https://www.lykke.com/cp/terms-and-regulation">Terms and Regulation</a> page and I agree to all of the terms and conditions, and, in particular:
             </p>
             <div class="row pt-5 pb-5">
                 <p class="lead col-md-4 text-center">
@@ -20,7 +19,8 @@
                 </p>
             </div>
             <p class="lead">
-                If you do not agree or understand the <a href="https://www.lykke.com/cp/terms-and-regulation">Terms and Regulation</a>, do not purchase Tokens.
+                If you do not agree or understand the
+                <a href="https://www.lykke.com/cp/terms-and-regulation">Terms and Regulation</a>, do not purchase Tokens.
             </p>
             <p class="lead">
                 Click Accept to indicate that you have read and agree to the terms and conditions, including Section 8 governing use of the
@@ -28,9 +28,10 @@
             </p>
             <a class="btn btn-primary btn-lg" href="" ng-click="$ctrl.accept()">Accept</a>
         </div>
-        <form ng-show="$ctrl.showForm()" name="form" novalidate ng-class="{ 'was-validated': form.$submitted }">
+        <form ng-show="$ctrl.showForm()" name="form" novalidate>
             <div class="form-group">
-                <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter your email address" required ng-model="$ctrl.data.email">
+                <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter your email address" required ng-model="$ctrl.data.email"
+                    ng-class="{ 'is-invalid': form.email.$touched && form.email.$invalid }">
                 <div class="invalid-feedback">Valid email address is required.</div>
             </div>
             <button type="submit" class="btn btn-primary btn-lg" ng-click="form.$valid && $ctrl.signUp()">Signup</button>

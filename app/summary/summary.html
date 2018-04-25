@@ -1,12 +1,100 @@
-<section id="invest" class="pt-5 pb-5">
+<section id="invest" class="pt-5 pb-5" ng-show="!!$ctrl.investor">
     <div class="container">
-        <h1 class="display-4 pb-5 text-center">My Dashboard</h1>
-        
-        <div ng-show="$ctrl.showAddressForm()">
+        <h1 class="display-4 text-center">My Dashboard</h1>
+        <p class="lead text-center mb-5">{{$ctrl.investor.email}}</p>
 
+        <div ng-hide="$ctrl.investor.tokenAddress">
+            <p class="lead">
+                Please provide your Ethereum ERC-20 compatible wallet address, where we will send your tokens when minting.
+            </p>
+            <form name="addressForm" novalidate>
+                <div class="form-group">
+                    <input type="text" name="tokenAddress" class="form-control form-control-lg" placeholder="Enter your token address" required
+                        ng-model="$ctrl.data.tokenAddress" ng-class="{ 'is-invalid': !!$ctrl.errorMessage || (addressForm.tokenAddress.$touched && addressForm.tokenAddress.$invalid) }"
+                        ng-change="$ctrl.errorMessage = ''">
+                    <div class="invalid-feedback">{{$ctrl.errorMessage || 'ERC-20 compatible address is required.' }}</div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg" ng-click="addressForm.$valid && $ctrl.save()">Save</button>
+            </form>
         </div>
 
-        <div ng-show="$ctrl.showSummary()">
+        <div ng-show="$ctrl.investor.tokenAddress">
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Do not make any payments if this is not your email address!
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Only send funds to the addresses displayed below. The pay-in adresses are unique to you.
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                You will get a conﬁrmation email as soon as we receive your payment.
+                <br/> You can send Ether and Bitcoin from any source, including wallets from any exchange.
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h4 class="text-center">ETH pay-in address</h4>
+                    <p class="lead text-center">
+                        <img ng-src="{{$ctrl.urls.getQrUrl($ctrl.investor.payInEthAddress)}}" alt="{{$ctrl.investor.payInEthAddress}}" height="300"
+                            width="300" />
+                        <br />
+                        <span>{{$ctrl.investor.payInEthAddress}}</span>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-center">BTC pay-in address</h4>
+                    <p class="lead text-center">
+                        <img ng-src="{{$ctrl.urls.getQrUrl($ctrl.investor.payInBtcAddress)}}" alt="{{$ctrl.investor.payInBtcAddress}}" height="300"
+                            width="300" />
+                        <br />
+                        <span>{{$ctrl.investor.payInBtcAddress}}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h4 class="text-center">Invested ETH amount</h4>
+                    <p class="lead text-center">{{$ctrl.investor.amountEth}}</p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-center">Invested BTC amount</h4>
+                    <p class="lead text-center">{{$ctrl.investor.amountBtc}}</p>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h4 class="text-center">Invested USD amount</h4>
+                    <p class="lead text-center">{{$ctrl.investor.amountFiat}}</p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-center">Balance</h4>
+                    <p class="lead text-center">{{$ctrl.investor.amountToken}}</p>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h4 class="text-center">KYC status</h4>
+                    <p class="lead text-center">{{$ctrl.investor.kycStatus}}</p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-center">KYC link</h4>
+                    <a href="{{$ctrl.investor.kycLink}}" class="lead text-center wrap">{{$ctrl.investor.kycLink}}</p>
+                </div>
+            </div>
 
         </div>
 

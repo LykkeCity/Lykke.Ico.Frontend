@@ -16,3 +16,9 @@ app {
 ng-view {
     flex: 1;
 }
+
+.wrap {
+    display: block;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
