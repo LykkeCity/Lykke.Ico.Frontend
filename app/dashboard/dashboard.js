@@ -1,21 +1,13 @@
-class SummaryController {
+class DashboardController {
     constructor($http, $location, $route, urls) {
         this.$http = $http;
         this.$location = $location;
         this.$route = $route;
         this.urls = urls;
-        this.data = {
-            tokenAddress: "",
-            refundEthAddress: "",
-            refundBtcAddress: ""
-        };
+        this.data = { tokenAddress: "", refundEthAddress: "", refundBtcAddress: "" };
         this.investor = null;
         this.errorMessage = "";
-        this.params = {
-            headers: {
-                authToken: $route.current.params.authToken
-            }
-        };
+        this.params = { headers: { authToken: $route.current.params.authToken } };
     }
 
     $onInit() {
@@ -44,7 +36,7 @@ class SummaryController {
 }
 
 angular.module("app")
-    .component("summary", {
-        templateUrl: "app/summary/summary.html",
-        controller: SummaryController
+    .component("dashboard", {
+        templateUrl: "app/dashboard/dashboard.html",
+        controller: DashboardController
     });
