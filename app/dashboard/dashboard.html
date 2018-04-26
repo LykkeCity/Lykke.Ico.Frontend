@@ -2,17 +2,27 @@
     <div class="container">
         <h1 class="display-4 text-center">My Dashboard</h1>
         <p class="lead text-center mb-5">{{$ctrl.investor.email}}</p>
-        <p class="lead">
-            Please provide your Ethereum ERC-20 compatible wallet address, where we will send your tokens when minting.
-        </p>
         <form name="addressForm" novalidate>
+            <p class="lead">
+                Please provide your Ethereum ERC-20 compatible wallet address, where we will send your tokens when minting:
+            </p>
             <div class="form-group">
                 <input type="text" name="tokenAddress" class="form-control form-control-lg" placeholder="Enter your token address" required
-                    ng-model="$ctrl.data.tokenAddress" ng-class="{ 'is-invalid': !!$ctrl.errorMessage || (addressForm.tokenAddress.$touched && addressForm.tokenAddress.$invalid) }"
-                    ng-change="$ctrl.errorMessage = ''">
-                <div class="invalid-feedback">{{$ctrl.errorMessage || 'ERC-20 compatible address is required.' }}</div>
+                    ng-model="$ctrl.data.tokenAddress" ng-class="{ 'is-invalid': (addressForm.$submitted || addressForm.tokenAddress.$touched) && addressForm.tokenAddress.$invalid }">
+                <div class="invalid-feedback">ERC-20 compatible address is required</div>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="addressForm.$valid && $ctrl.save()">Save</button>
+            <p class="lead mt-5">
+                Also we strongly suggest to provide ETH and BTC addresses for possible refunds. They are not required but could help us to
+                make a refund without delays:
+            </p>
+            <div class="form-group">
+                <input type="text" name="refundEthAddress" class="form-control form-control-lg" placeholder="Enter refund ETH address" ng-model="$ctrl.data.refundEthAddress">
+            </div>
+            <div class="form-group">
+                <input type="text" name="refundBtcAddress" class="form-control form-control-lg" placeholder="Enter refund BTC address" ng-model="$ctrl.data.refundBtcAddress">
+            </div>
+            <div class="text-danger mt-5" ng-if="$ctrl.errorMessage">{{$ctrl.errorMessage}}</div>
+            <button type="submit" class="btn btn-primary btn-lg mt-5" ng-click="addressForm.$valid && $ctrl.save()">Save</button>
         </form>
     </div>
 </section>
